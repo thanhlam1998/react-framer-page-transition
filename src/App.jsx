@@ -4,11 +4,13 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 import Header from "./components/header";
 import Home from "./pages/Home";
-import "./App.scss";
 import Model from "./pages/Model";
+
+import "./App.scss";
 
 function App() {
   const location = useLocation();
@@ -20,14 +22,20 @@ function App() {
   return (
     <>
       <Header />
-      <Switch location={location} key={location.pathname}>
-        <Route
-          exact
-          path="/"
-          render={() => <Home imageDetails={imageDetails} />}
-        />
-        <Route exact path="/model/:id" render={() => <Model />} />
-      </Switch>
+      <AnimatePresence initial={false} exitBeforeEnter>
+        <Switch location={location} key={location.pathname}>
+          <Route
+            exact
+            path="/"
+            render={() => <Home imageDetails={imageDetails} />}
+          />
+          <Route
+            exact
+            path="/model/:id"
+            render={() => <Model imageDetails={imageDetails} />}
+          />
+        </Switch>
+      </AnimatePresence>
     </>
   );
 }

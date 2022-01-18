@@ -1,6 +1,13 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
 import imageSrc from "../images/compressed-image.jpg";
+
+const transition = {
+  duration: 0.6,
+  ease: [0.6, 0.01, -0.05, 0.9],
+};
 
 const Home = ({ imageDetails }) => (
   <>
@@ -16,17 +23,25 @@ const Home = ({ imageDetails }) => (
               }}>
               <div className="frame">
                 <Link to={`/model/yasmeen-tariq`}>
-                  <img src={imageSrc} alt="image" />
+                  <motion.img
+                    src={imageSrc}
+                    alt="image"
+                    whileHover={{ scale: 1.1 }}
+                    transition={transition}
+                  />
                 </Link>
               </div>
             </div>
-            <div className="information">
+            <motion.div
+              exit={{ opacity: 0 }}
+              transition={transition}
+              className="information">
               <div className="title">Yasmeen Tariq</div>
               <div className="location">
                 <span>28.538336</span>
                 <span>-81.379234</span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
